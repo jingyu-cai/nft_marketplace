@@ -9,3 +9,5 @@ cd NFT-Marketplace-Tutorial
 npm install
 npm start
 ```
+
+<img width="1436" alt="Screen Shot 2022-06-26 at 7 13 00 PM" src="https://user-images.githubusercontent.com/29126792/175837447-4ea49585-95be-4a0c-8d51-d36ac28a505d.png">
