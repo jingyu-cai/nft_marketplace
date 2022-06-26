@@ -9,10 +9,7 @@ cd NFT-Marketplace-Tutorial
 npm install
 npm start
 ```
-<<<<<<< HEAD
-=======
 
->>>>>>> c036b8b3c295843be1bfa912e31003047593ac58
 # Pages
 ## View top NFTs
 <img width="1436" alt="Screen Shot 2022-06-26 at 7 13 00 PM" src="https://user-images.githubusercontent.com/29126792/175837447-4ea49585-95be-4a0c-8d51-d36ac28a505d.png">
