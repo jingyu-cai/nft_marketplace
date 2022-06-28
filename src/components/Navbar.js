@@ -55,8 +55,8 @@ async function connectWebsite() {
 }
 
   useEffect(() => {
-    let val = window.ethereum.isConnected();
-    if(val)
+    let val = typeof window.ethereum;
+    if(val !== "undefined")
     {
       console.log("here");
       getAddress();
