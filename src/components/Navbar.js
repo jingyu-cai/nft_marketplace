@@ -35,23 +35,27 @@ function updateButton() {
 }
 
 async function connectWebsite() {
-
-    const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-    if(chainId !== '0x5')
-    {
-      //alert('Incorrect network! Switch your metamask network to Rinkeby');
-      await window.ethereum.request({
-        method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '0x5' }],
-     })
-    }  
-    await window.ethereum.request({ method: 'eth_requestAccounts' })
-      .then(() => {
-        updateButton();
-        console.log("here");
-        getAddress();
-        window.location.replace(location.pathname)
-      });
+    if (typeof window.ethereum !== "undefined") {
+      const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+      if(chainId !== '0x5')
+      {
+        //alert('Incorrect network! Switch your metamask network to Rinkeby');
+        await window.ethereum.request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: '0x5' }],
+       })
+      }  
+      await window.ethereum.request({ method: 'eth_requestAccounts' })
+        .then(() => {
+          updateButton();
+          console.log("here");
+          getAddress();
+          window.location.replace(location.pathname)
+          window.location.reload();
+        });
+    } else {
+      console.log("Please install MetaMask!");
+    }
 }
 
   useEffect(() => {
@@ -60,13 +64,16 @@ async function connectWebsite() {
     {
       console.log("here");
       getAddress();
+    }
+
+    if (currAddress !== "0x") {
       toggleConnect(val);
       updateButton();
     }
 
-    window.ethereum.on('accountsChanged', function(accounts){
-      window.location.replace(location.pathname)
-    })
+    // window.ethereum.on('accountsChanged', function(accounts){
+    //   window.location.replace(location.pathname)
+    // })
   });
 
     return (
@@ -93,11 +100,11 @@ async function connectWebsite() {
               }
               {location.pathname === "/sellNFT" ? 
               <li className='border-b-2 hover:pb-0 p-2'>
-                <Link to="/sellNFT">List My NFT</Link>
+                <Link to="/sellNFT">List NFT</Link>
               </li>
               :
               <li className='hover:border-b-2 hover:pb-0 p-2'>
-                <Link to="/sellNFT">List My NFT</Link>
+                <Link to="/sellNFT">List NFT</Link>
               </li>              
               }              
               {location.pathname === "/profile" ? 
@@ -110,7 +117,7 @@ async function connectWebsite() {
               </li>              
               }  
               <li>
-                <button className="enableEthereumButton bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm" onClick={connectWebsite}>{connected? "Connected":"Connect Wallet"}</button>
+                <button className="enableEthereumButton bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm" onClick={connectWebsite}>{connected? "Connected":"Connect"}</button>
               </li>
             </ul>
           </li>

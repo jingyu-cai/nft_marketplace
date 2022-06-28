@@ -34,7 +34,7 @@ const sampleData = [
         "address":"0xe81Bf5A757C4f7F82a2F23b1e59bE45c33c5b13",
     },
 ];
-const [data, updateData] = useState(sampleData);
+const [data, updateData] = useState([]);
 const [dataFetched, updateFetched] = useState(false);
 
 async function getAllNFTs() {
@@ -74,16 +74,19 @@ if(!dataFetched)
     getAllNFTs();
 
 return (
-    <div>
+    <div className="profileClass" style={{"min-height":"100vh"}}>
         <Navbar></Navbar>
-        <div className="flex flex-col place-items-center mt-20">
-            <div className="md:text-xl font-bold text-white">
+        <div className="flex flex-col place-items-center mt-20 text-white">
+            <div className="md:text-xl font-bold">
                 Top NFTs
             </div>
             <div className="flex mt-5 justify-between flex-wrap max-w-screen-xl text-center">
                 {data.map((value, index) => {
                     return <NFTTile data={value} key={index}></NFTTile>;
                 })}
+            </div>
+            <div className="mt-10 text-xl">
+                    {data.length === 0 ? "Oops, No NFT data to display (Are you logged in?)":""}
             </div>
         </div>            
     </div>
